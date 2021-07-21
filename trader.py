@@ -42,8 +42,7 @@ last_twenty_closes =[]
 
 
 # MAKE SURE ACCOUNT IS WORKING: 
-key = "AK3RSUVSZP632YMEMHCV"
-sec = "QqmTn3OG6PwW0epqFVU78MIvHOAbM45F7JDjTCwW"
+
 #API endpoint URL
 url = "https://api.alpaca.markets"
 #api_version v2 refers to the version that we'll use
