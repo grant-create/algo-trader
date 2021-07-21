@@ -299,84 +299,84 @@ def sell_check():
 
 
 
-# ## WHILE DAY IS NOT EQUAL TO LIKE 2 WEEKS FROM NOW?
-# while day != '07/30/21':
-#     print("start")
-#     date_format='%H:%M:%S'
-#     date = datetime.now(tz=utc)
-#     date = date.astimezone(timezone('US/Pacific'))
-#     day=date.strftime("%D")
-# ##     MIGHT NEED TO RE CLEAR LISTS EVERY DAY??
-#     buy_on_open = []
+## WHILE DAY IS NOT EQUAL TO LIKE 2 WEEKS FROM NOW?
+while day != '07/30/21':
+    print("start")
+    date_format='%H:%M:%S'
+    date = datetime.now(tz=utc)
+    date = date.astimezone(timezone('US/Pacific'))
+    day=date.strftime("%D")
+##     MIGHT NEED TO RE CLEAR LISTS EVERY DAY??
+    buy_on_open = []
     
-#     # NEED TO LOOP THIS, OTHERWISE PROGRAM WILL CLEAR ALL LISTS
+    # NEED TO LOOP THIS, OTHERWISE PROGRAM WILL CLEAR ALL LISTS
 
 
-#     # # HOW THINGS SHOULD RUN: 
+    # # HOW THINGS SHOULD RUN: 
 
-#     # # IF MARKET OPEN:
-# #     clear_output()
-#     alpacaInfo()
-#     day
-#     print(date)
+    # # IF MARKET OPEN:
+#     clear_output()
+    alpacaInfo()
+    day
+    print(date)
     
     
-#     clock.is_open
-#     if clock.is_open:
+    clock.is_open
+    if clock.is_open:
         
-# # KEEPS RUNNING when it shouldnt, this causes all the "daily" lists to mess up
-# # need to make this happen once a day, by adding a second while loop
+# KEEPS RUNNING when it shouldnt, this causes all the "daily" lists to mess up
+# need to make this happen once a day, by adding a second while loop
         
-#         # UPDATE PREVIOUS DAY TO SELLABLE (TO PREVENT DAY TRADING)                
-#         update_lists(one_day_hold)  
+        # UPDATE PREVIOUS DAY TO SELLABLE (TO PREVENT DAY TRADING)                
+        update_lists(one_day_hold)  
 
-#         # GET LIST OF NEW STOCKS TO BUY                    
-#         getList()
-#         print(buy_on_open)
-#         time.sleep(6)
-#         clear_output()
-#         ## SORT LIST BY PRICE TO MAXIMIZE SHARES PURCHASED
-# #         sortList()
+        # GET LIST OF NEW STOCKS TO BUY                    
+        getList()
+        print(buy_on_open)
+        time.sleep(6)
+        clear_output()
+        ## SORT LIST BY PRICE TO MAXIMIZE SHARES PURCHASED
+#         sortList()
 
-#         # BUY NEW STOCKS (IF THEY ARE NOT ALREADY OWNED)
-#         buyStocks()
-#         clear_output()
-#         print("run")
-#         print("one day hold:", one_day_hold)
-#         # SELL WHAT HAS GONE UP
-#         sell_check()
-# #         
+        # BUY NEW STOCKS (IF THEY ARE NOT ALREADY OWNED)
+        buyStocks()
+        clear_output()
+        print("run")
+        print("one day hold:", one_day_hold)
+        # SELL WHAT HAS GONE UP
+        sell_check()
+#         
 
-#        #     WHILE MARKET IS STILL OPEN SLEEP/SELL CHECK
-# #         #CHECK AGAIN A FEW TIMES IF PRICES HAVE GONE UP
-#         clock.is_open
-#         while clock.is_open == True:
-#             account = api.get_account()
-#             clock = api.get_clock()
-#             portfolio = api.list_positions()
-#             print("The market is open: {}".format(clock.is_open))
-#             clock.is_open
-#             sell_check()
-#             print("waiting to check again")
-#             time.sleep(60*20)
-#             print('time now: {}'.format(date))
+       #     WHILE MARKET IS STILL OPEN SLEEP/SELL CHECK
+#         #CHECK AGAIN A FEW TIMES IF PRICES HAVE GONE UP
+        clock.is_open
+        while clock.is_open == True:
+            account = api.get_account()
+            clock = api.get_clock()
+            portfolio = api.list_positions()
+            print("The market is open: {}".format(clock.is_open))
+            clock.is_open
+            sell_check()
+            print("waiting to check again")
+            time.sleep(60*20)
+            print('time now: {}'.format(date))
 
 
         
-        
+         
 
 
-# #         # # CHECK TIME/MARKET HOURS/HAVE PROGRAM SLEEP UNTIL THE MORNING
-#     else: 
-#         print("The market is closed")
-#         for x in portfolio:
-#             if x.symbol not in sellable_pos:
-#                 sellable_pos.append(x.symbol)
-#         print('added everything to sellable', sellable_pos)
-#         time.sleep(60*9)
-#         pass
-#         #continue???
+#         # # CHECK TIME/MARKET HOURS/HAVE PROGRAM SLEEP UNTIL THE MORNING
+    else: 
+        print("The market is closed")
+        for x in portfolio:
+            if x.symbol not in sellable_pos:
+                sellable_pos.append(x.symbol)
+        print('added everything to sellable', sellable_pos)
+        time.sleep(60*9)
+        pass
+        #continue???
 
 
-alpacaInfo()                     
+                     
 
