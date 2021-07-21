@@ -1,5 +1,3 @@
-from config import *
-
 # TRADING PROGRAM 
 # --  GOING TO USE ALL COMPONENTS W/N THIS FILE TO BUILD AN ALGO TRADER --
 
@@ -10,8 +8,6 @@ from config import *
 
 
 import click
-
-
 import pandas as pd
 import pandas_datareader.data as web
 import datetime
@@ -46,7 +42,8 @@ last_twenty_closes =[]
 
 
 # MAKE SURE ACCOUNT IS WORKING: 
-
+key = "AK3RSUVSZP632YMEMHCV"
+sec = "QqmTn3OG6PwW0epqFVU78MIvHOAbM45F7JDjTCwW"
 #API endpoint URL
 url = "https://api.alpaca.markets"
 #api_version v2 refers to the version that we'll use
@@ -66,7 +63,8 @@ def alpacaInfo():
     
 
     # MAKE SURE ACCOUNT IS WORKING: 
-
+    key = "AK3RSUVSZP632YMEMHCV"
+    sec = "QqmTn3OG6PwW0epqFVU78MIvHOAbM45F7JDjTCwW"
     #API endpoint URL
     url = "https://api.alpaca.markets"
     #api_version v2 refers to the version that we'll use
@@ -88,6 +86,9 @@ money_to_spend = float(account.buying_power) * .75
 def update_lists(one_day_hold):
     # ADD PREVIOUS DAY LIST TO SELLABLE POSITIONS
     sellable_pos.extend(one_day_hold)
+    for x in portfolio:
+            if x.symbol not in sellable_pos:
+                sellable_pos.append(x.symbol)
     print("lists updated")
    # CLEAR PREVIOUS DAY LIST
     one_day_hold = []
@@ -363,7 +364,7 @@ while day != '07/30/21':
 
 
         
-         
+        
 
 
 #         # # CHECK TIME/MARKET HOURS/HAVE PROGRAM SLEEP UNTIL THE MORNING
@@ -378,5 +379,4 @@ while day != '07/30/21':
         #continue???
 
 
-                     
-
+                             
