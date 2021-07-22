@@ -96,13 +96,7 @@ def update_lists(one_day_hold):
 # DAILY GET STOCKS WE ARE GOING TO BUY
 def getList():
     global buy_on_open
-#     today = date.today()
-#     endyear = today.strftime('%Y')
-#     endmonth = today.strftime('%m')
-#     endday = today.strftime('%d')
-#     start = datetime(2021,1,1)
-#     end = datetime(int(endyear),int(endmonth),int(endday))
-#     #to get list of S&P500 stocks
+
     payload=pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
     first_table = payload[0]
     second_table = payload[1]
@@ -129,30 +123,16 @@ def getList():
 
             average_of_last_twenty = round(mean(last_twenty_closes),2)
             average_of_last_twenty
-            
+
+            # if close is less than 20 d rolling avg. and less than $101 per share
             if yesterday_close.c < average_of_last_twenty and yesterday_close.c < 101:
-            
-#             stock_close =web.DataReader(stock,'yahoo',start,end)
-#             #Standard devs differences/sum
-#             lt= stock_close['Close'][-21]
-#             twenty_avg = mean(lt)
-#             lc= stock_close['Close'][-1]
-            
-            #how much do you want to spend on stock
-#             if lc < twenty_avg and lc < 101:
-                
+
                 # MIGHT WANT TO KEEP STOCK IN PORTFOLIO OUT OF LIST
         
                 #################
                 buy_on_open.append((stock, yesterday_close.c))
                 #################
-#                 sortedList.append{stock: yesterday_close}
-                
-#                 last_twenty= stock_close['Close'][-21:-1].tolist()
-#                 twenty_avg = mean(last_twenty)
-#                 last_close= stock_close['Close'][-1].tolist()
-#                 lastclose.append(round(last_close,2))
-#                 twentyavg.append(round(twenty_avg,2))
+
             else:
                 pass
             clear_output()
@@ -190,7 +170,7 @@ def buyStocks():
     ################
     
     #BUY THEM: 
-#     money_to_spend = float(account.buying_power) * .75
+    #     money_to_spend = float(account.buying_power) * .75
     
     ###########################
     for symbol, lc in sorted_List: 
@@ -237,7 +217,7 @@ def buyStocks():
                                              type="market",
                                              time_in_force="day")
                         time.sleep(5) #5 seconds
-    #                     money_to_spend = money_to_spend - float(api.get_last_quote(symbol).askprice)
+                        # money_to_spend = money_to_spend - float(api.get_last_quote(symbol).askprice)
                         one_day_hold.append(symbol)
                     except (HTTPError, APIError) as e:
                         print('APIError', symbol)
@@ -255,11 +235,13 @@ def buyStocks():
             pass
         
 # IF NEW DAY AND PRICE HAS GONE UP, SELL STOCKS, ELSE IF DOWN 14% BUY DOUBLE
-def sell_check():
-#     clear_output()
+def sell_check():   
+
     print("Sell Check")
     for order in api.list_positions():
         if str(order.symbol) in sellable_pos:
+
+            # UPDATE LAST VALUE ON LINE 245 FOR PROFIT YOU WANT
             if float(order.market_value) >= (float(order.avg_entry_price) * 1.02):
                 api.submit_order(symbol=((order.symbol)),
                                      qty = (int(order.qty)),
@@ -272,17 +254,14 @@ def sell_check():
                 print("not high enough")
                 pass
 
-                             
-                             
-                             
-#         elif str(order.symbol) in sellable_pos & order.market_value < order.avg_entry_price*.86
-            
-# #             IF HAVE ENOUGH BUYING POWER:
-#                 api.submit_order(symbol=((order.symbol)),
-#                      qty = ((OLD QTY * 2)),
-#                      side=("buy"),
-#                      type="market",
-#                      time_in_force="day"
+                                                     
+        #         elif str(order.symbol) in sellable_pos & order.market_value < order.avg_entry_price*.86        
+        # #             IF HAVE ENOUGH BUYING POWER:
+        #                 api.submit_order(symbol=((order.symbol)),
+        #                      qty = ((OLD QTY * 2)),
+        #                      side=("buy"),
+        #                      type="market",
+        #                      time_in_force="day"
                              
         else:
             pass
@@ -292,8 +271,6 @@ def sell_check():
     
 
     # check a few times a day for price, while market is open...
-
-    
 
 
 
@@ -334,7 +311,7 @@ while day != '07/30/21':
         time.sleep(6)
         clear_output()
         ## SORT LIST BY PRICE TO MAXIMIZE SHARES PURCHASED
-#         sortList()
+        #sortList()
 
         # BUY NEW STOCKS (IF THEY ARE NOT ALREADY OWNED)
         buyStocks()
@@ -343,10 +320,10 @@ while day != '07/30/21':
         print("one day hold:", one_day_hold)
         # SELL WHAT HAS GONE UP
         sell_check()
-#         
+         
 
-       #     WHILE MARKET IS STILL OPEN SLEEP/SELL CHECK
-#         #CHECK AGAIN A FEW TIMES IF PRICES HAVE GONE UP
+        # WHILE MARKET IS STILL OPEN SLEEP/SELL CHECK
+        #CHECK AGAIN A FEW TIMES IF PRICES HAVE GONE UP
         clock.is_open
         while clock.is_open == True:
             account = api.get_account()
@@ -364,7 +341,7 @@ while day != '07/30/21':
         
 
 
-#         # # CHECK TIME/MARKET HOURS/HAVE PROGRAM SLEEP UNTIL THE MORNING
+        # # CHECK TIME/MARKET HOURS/HAVE PROGRAM SLEEP UNTIL THE MORNING
     else: 
         print("The market is closed")
         for x in portfolio:
@@ -376,4 +353,11 @@ while day != '07/30/21':
         #continue???
 
 
-                             
+"""
+OPTIONAL SETTINGS TO UPDATE:
+
+DATE TO RUN UNITL: LINE 278
+PERCENTAGE INCREASE TO SELL AT: LINE 245
+PRICE PER SHARE TO ADD TO LIST: LINE 128
+
+"""                           
