@@ -337,10 +337,6 @@ while day != '07/30/21':
             print('time now: {}'.format(date))
 
 
-        
-        
-
-
         # # CHECK TIME/MARKET HOURS/HAVE PROGRAM SLEEP UNTIL THE MORNING
     else: 
         print("The market is closed")
