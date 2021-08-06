@@ -232,6 +232,8 @@ def getList():
                 clear_output()
                 print(stock)
                 print("{} of 500".format(c))
+                if c == 100:
+                    time.sleep(15)
                 if c == 250:
                     time.sleep(30)
                 if c == 450:
