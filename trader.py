@@ -239,7 +239,7 @@ def getList():
                 if c == 450:
                     time.sleep(15)
                 print(len(buy_on_open))
-        except KeyError:
+        except (KeyError, IndexError):
             pass  
     time.sleep(10)
     return buy_on_open
@@ -436,6 +436,10 @@ while day != start_date:
             sell_check()
             print("waiting to check again")
             time.sleep(60*20)
+            date_format='%H:%M:%S'
+            date = datetime.now(tz=utc)
+            date = date.astimezone(timezone('US/Pacific'))
+            day=date.strftime("%D")
             print('time now: {}'.format(date))
 
 
