@@ -373,9 +373,12 @@ start_date = str(dt.datetime.now() + dt.timedelta(30))
 
 # print(start_date[:10])
 
-
+end_date = False
+if start_date == day:
+        end_date = True
 ## WHILE DAY IS NOT EQUAL TO LIKE 2 WEEKS FROM NOW?
-while day != start_date:
+while not end_date:
+    
     print("starting")
     # time.sleep(60*60)
     
@@ -385,7 +388,9 @@ while day != start_date:
     day=date.strftime("%D")
 ##     MIGHT NEED TO RE CLEAR LISTS EVERY DAY??
     buy_on_open = []
-    
+
+    if start_date == day:
+        end_date = True
     # NEED TO LOOP THIS, OTHERWISE PROGRAM WILL CLEAR ALL LISTS
 
 
@@ -435,7 +440,7 @@ while day != start_date:
             clock.is_open
             sell_check()
             print("waiting to check again")
-            time.sleep(60*20)
+            time.sleep(60*15)
             date_format='%H:%M:%S'
             date = datetime.now(tz=utc)
             date = date.astimezone(timezone('US/Pacific'))
