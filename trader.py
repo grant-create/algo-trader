@@ -28,25 +28,23 @@ start_date = str(dt.datetime.now() + dt.timedelta(30))
 
 
 import pandas as pd
-import pandas_datareader.data as web
 import datetime
 from statistics import mean
 from datetime import date
-from IPython.display import clear_output
-import math
+
 import pandas as pd
 import alpaca_trade_api as tradeapi
 import time
-from IPython.display import clear_output
 from datetime import datetime
 from pytz import timezone, utc
-import time
 from urllib.error import HTTPError
 
-date_format='%H:%M:%S'
-date = datetime.now(tz=utc)
-date = date.astimezone(timezone('US/Pacific'))
-day=date.strftime("%D")
+
+
+# COPY OVER TO P4 BELOW THIS LINE, LINE 50 IN P4:
+
+
+
 
 previousclose = []
 lastclose = []
@@ -75,41 +73,6 @@ print(account.buying_power)
 clock = api.get_clock()
 portfolio = api.list_positions()
 print("The market is open: {}".format(clock.is_open))
-
-
-
-
-
-
-# from dotenv import load_dotenv
-# # import the operating system
-# import os
-
-# # this is how you get environmental variables
-# key = os.environ['key']
-# sec = os.environ['sec']
-
-
-
-
-
-import pandas as pd
-import pandas_datareader.data as web
-import datetime
-from statistics import mean
-from datetime import date
-from IPython.display import clear_output
-import math
-import pandas as pd
-import alpaca_trade_api as tradeapi
-import time
-from IPython.display import clear_output
-from datetime import datetime
-from pytz import timezone, utc
-import time
-from urllib.error import HTTPError
-
-
 
 
 date_format='%H:%M:%S'
@@ -358,7 +321,7 @@ def sell_check():
         #                      side=("buy"),
         #                      type="market",
         #                      time_in_force="day"
-                            
+                           
         else:
             pass
                                 
@@ -367,6 +330,7 @@ def sell_check():
     
 
     # check a few times a day for price, while market is open...
+
 
 
 start_date = str(dt.datetime.now() + dt.timedelta(30))
@@ -404,7 +368,7 @@ while not end_date:
     
     
     clock.is_open
-    if clock.is_open:
+    if clock.is_open == True:
         
 # KEEPS RUNNING when it shouldnt, this causes all the "daily" lists to mess up
 # need to make this happen once a day, by adding a second while loop
@@ -416,17 +380,20 @@ while not end_date:
         getList()
         print(buy_on_open)
         time.sleep(6)
-        clear_output()
+        
         ## SORT LIST BY PRICE TO MAXIMIZE SHARES PURCHASED
         #sortList()
 
         # BUY NEW STOCKS (IF THEY ARE NOT ALREADY OWNED)
         buyStocks()
-        clear_output()
+        
         print("run")
         print("one day hold:", one_day_hold)
         # SELL WHAT HAS GONE UP
         sell_check()
+
+        # IF HELD FOR TOO LONG SELL
+        
         
 
         # WHILE MARKET IS STILL OPEN SLEEP/SELL CHECK
@@ -460,6 +427,7 @@ while not end_date:
         #continue???
 
     else:
+        print("Clock is not open/skipped the 'if clock is open part of loop'")
         time.sleep(60*45)
 
 """
