@@ -192,7 +192,7 @@ def getList():
 
                 else:
                     pass
-                clear_output()
+                
                 print(stock)
                 print("{} of 500".format(c))
                 if c == 100:
@@ -338,8 +338,7 @@ start_date = str(dt.datetime.now() + dt.timedelta(30))
 # print(start_date[:10])
 
 end_date = False
-if start_date == day:
-        end_date = True
+
 ## WHILE DAY IS NOT EQUAL TO LIKE 2 WEEKS FROM NOW?
 while not end_date:
     
@@ -366,7 +365,7 @@ while not end_date:
     day
     print(date)
     
-    
+    clock = api.get_clock()
     clock.is_open
     if clock.is_open == True:
         
