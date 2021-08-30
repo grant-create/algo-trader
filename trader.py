@@ -308,7 +308,7 @@ def sell_check():
                                     type="market",
                                     time_in_force="day")
                 sellable_pos.remove(order.symbol)
-                print("sold and removed")
+                print(f"sold and removed {order.symbol}")
             else: 
                 print("not high enough")
                 pass
@@ -426,7 +426,7 @@ while not end_date:
         #continue???
 
     else:
-        print("Clock is not open/skipped the 'if clock is open part of loop'")
+        print("Clock is not open", "Program ends on:", start_date)
         time.sleep(60*45)
 
 """
