@@ -326,8 +326,24 @@ def sell_check():
             pass
                                 
                                     
-
+def bail():
+    import datetime
+    bail_date = (str(datetime.datetime.now() - datetime.timedelta(5)))[:10]
     
+    orders = api.list_orders("closed", limit=500)
+
+    for x in orders:
+        for y in portfolio:
+            if x.asset_id == y.asset_id and str(x.created_at)[:10] == bail_date:    
+                api.submit_order(symbol=((y.symbol)),
+                                    qty = (y.qty),
+                                    side=("sell"),
+                                    type="market",
+                                    time_in_force="day")
+                print(f"Bailed out of {y.symbol}")
+            else:
+                print("Nothing to bail out of")
+                
 
     # check a few times a day for price, while market is open...
 
@@ -392,7 +408,7 @@ while not end_date:
         sell_check()
 
         # IF HELD FOR TOO LONG SELL
-        
+        bail()
         
 
         # WHILE MARKET IS STILL OPEN SLEEP/SELL CHECK
